@@ -1,1 +1,1 @@
-export { router as v1 } from './router.js'
+export { router as v1 } from './router'
