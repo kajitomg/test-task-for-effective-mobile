@@ -1,13 +1,14 @@
 import { RequestHandler } from 'express';
 import { setRefreshCookie } from '../../utils/cookie';
 import { validateBody, validateCookies } from '../../utils/validator';
-import { refreshCookiesSchema, signinBodySchema, signupBodySchema } from './auth-schemas';
+import { refreshCookiesSchema, signinBodySchema, signupBodySchema } from './auth.schemas';
+import { authService } from './auth.service';
 
 const authController = {
   signup: async (req, res, next) => {
     try {
       const data = await validateBody(signupBodySchema, req);
-      
+
       const result = await authService.signup(data);
       
       setRefreshCookie(res, result.refreshToken);
@@ -17,6 +18,7 @@ const authController = {
         accessToken: result.accessToken,
       });
     } catch (e) {
+      console.log(e)
       next(e);
     }
   },

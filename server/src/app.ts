@@ -1,5 +1,5 @@
 import express from 'express';
-import { errorMiddleware } from './middlewares/error-middleware';
+import { errorMiddleware } from './middlewares/error.middleware';
 import { router } from './routes';
 
 export function App() {

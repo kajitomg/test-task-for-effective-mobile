@@ -1,9 +1,7 @@
 import { prisma } from '../database';
 import { PrismaClient } from '../generated/prisma/client';
 
-type TransactionClient = Parameters<
-  Parameters<PrismaClient['$transaction']>[0]
->[0]
+export type TransactionClient = Omit<PrismaClient, '$connect' | '$disconnect' | '$on' | '$transaction' | '$use' | '$extends'>;
 
 type PrismaDatabase = PrismaClient | TransactionClient
 

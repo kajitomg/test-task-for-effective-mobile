@@ -1,1 +1,1 @@
-export { routes as authRoutes } from './auth-routes'
+export { routes as authRoutes } from './auth.routes'

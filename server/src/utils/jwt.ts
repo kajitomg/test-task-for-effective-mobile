@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import jwt from 'jsonwebtoken';
+import { User } from '../generated/prisma/client';
 
 const accessKey = process.env.JWT_ACCESS_KEY;
 const accessAge = Number(process.env.JWT_ACCESS_AGE) || 24;
@@ -13,10 +14,7 @@ if (!refreshKey) {
   throw new Error('Refresh key не найден!');
 }
 
-export interface TokenPayload {
-  id: string;
-  email: string;
-}
+export interface TokenPayload extends Pick<User, 'id' | 'email' | 'role'> {};
 
 const generateTokens = (payload: TokenPayload) => {
   const accessToken = jwt.sign(payload, accessKey, { expiresIn: `${accessAge}h` });
@@ -28,14 +26,14 @@ const generateTokens = (payload: TokenPayload) => {
   }
 }
 
-const validateAccessToken = (token: string): TokenPayload => {
+const validateAccessToken = (token: string): TokenPayload | null => {
   try {
     return jwt.verify(token, accessKey) as TokenPayload
   } catch (e) {
     return null;
   }
 }
-const validateRefreshToken = (token: string): TokenPayload => {
+const validateRefreshToken = (token: string): TokenPayload | null => {
   try {
     return jwt.verify(token, refreshKey) as TokenPayload
   } catch (e) {

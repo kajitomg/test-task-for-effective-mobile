@@ -1,9 +1,9 @@
 import bcrypt from 'bcryptjs';
 import { ApiError } from '../../exceptions/api-error';
-import { authTokenRepository } from '../../repositories/auth-token-repository';
-import { userRepository } from '../../repositories/user-repository';
+import { authTokenRepository } from '../../repositories/auth-token.repository';
+import { userRepository } from '../../repositories/user.repository';
 import { validateRefreshToken } from '../../utils/jwt';
-import { issueTokens } from './auth-utils';
+import { issueTokens } from './auth.utils';
 
 const authService = {
   signup: async (data: { first_name: string, middle_name?: string, last_name?: string, email: string, password: string }) => {
@@ -32,13 +32,13 @@ const authService = {
     const user = await userRepository.findByEmailWithCredentials(email);
     
     if (!user) {
-      throw ApiError.UnauthorizedError('Неверный email адрес или пароль');
+      throw ApiError.UnauthorizedError('Неверный email адрес или пароль!');
     }
       
     const compare = await bcrypt.compare(password, user.password);
       
     if (!compare) {
-      throw ApiError.UnauthorizedError('Неверный email адрес или пароль');
+      throw ApiError.UnauthorizedError('Неверный email адрес или пароль!');
     }
     
     return issueTokens(user);
@@ -54,7 +54,7 @@ const authService = {
     const storedToken = await authTokenRepository.findByUserId(payload.id);
     
     if (!storedToken || storedToken.refresh !== refreshToken) {
-      throw ApiError.UnauthorizedError('Токен отозван');
+      throw ApiError.UnauthorizedError('Токен отозван!');
     }
       
     const user = await userRepository.findById(payload.id)
