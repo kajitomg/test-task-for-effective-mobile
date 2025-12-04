@@ -26,9 +26,22 @@ model User {
   password      String
   role          Role        @default(USER)
   status        Status      @default(ACTIVE)
+  auth_token    AuthToken?
 
   created_at    DateTime    @default(now())
   updated_at    DateTime    @updatedAt
 
   @@map("users")
+}
+
+model AuthToken {
+  id            String      @id @default(uuid())
+  user_id       String      @unique
+  user          User        @relation(fields: [user_id], references: [id])
+  refresh       String
+
+  created_at    DateTime    @default(now())
+  updated_at    DateTime    @updatedAt
+
+  @@map("authTokens")
 }

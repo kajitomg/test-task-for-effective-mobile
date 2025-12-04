@@ -3,7 +3,7 @@ import type { ZodType } from 'zod';
 import { ZodError } from 'zod';
 import { ApiError } from '../exceptions/api-error.js';
 
-export function createValidate(key: 'body' | 'query' | 'params') {
+export function createValidate(key: 'body' | 'query' | 'params' | 'cookies') {
   return async function validate<T>(
     schema: ZodType<T>,
     request: Request,
@@ -19,6 +19,9 @@ export function createValidate(key: 'body' | 'query' | 'params') {
   };
 }
 
-export const validateBody = createValidate('body');
-export const validateQuery = createValidate('query');
-export const validateParams = createValidate('params');
+const validateBody = createValidate('body');
+const validateQuery = createValidate('query');
+const validateParams = createValidate('params');
+const validateCookies = createValidate('cookies');
+
+export { validateBody, validateQuery, validateParams, validateCookies }
