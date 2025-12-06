@@ -1,7 +1,6 @@
 import { RequestHandler } from 'express';
 import { ApiError } from '../exceptions/api-error';
-import { usersService } from '../features/users/users.service';
-import { userRepository } from '../repositories/user.repository';
+import { userRepository } from '../../entities/user';
 import { validateAccessToken } from '../utils/jwt';
 
 const authMiddleware: RequestHandler = async (req, res, next) => {

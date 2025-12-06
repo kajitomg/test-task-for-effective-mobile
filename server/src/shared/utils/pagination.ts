@@ -1,19 +1,16 @@
-import { z } from 'zod';
+import { z } from './zod';
 
-type PaginationOptions = {
-  page: number;
-  limit: number;
-}
+const PaginationQuerySchema = z.object({
+  page: z.int().min(1).default(1),
+  limit: z.int().max(100).default(10),
+}).strip()
+
+type PaginationOptions = z.output<typeof PaginationQuerySchema>
 
 const defaultPaginationOptions: PaginationOptions = {
   page: 1,
   limit: 10,
 }
-
-const paginationQuerySchema = z.object({
-  page: z.int().min(1).default(1),
-  limit: z.int().max(100).default(10),
-}).strip()
 
 const getPaginationParams = (page: number, limit: number) => {
   const skip = (page - 1) * limit;
@@ -32,4 +29,4 @@ const getPaginationMetadata = (page: number, limit: number, total: number) => {
   }
 }
 
-export { PaginationOptions, defaultPaginationOptions, paginationQuerySchema, getPaginationParams, getPaginationMetadata };
+export { PaginationOptions, defaultPaginationOptions, PaginationQuerySchema, getPaginationParams, getPaginationMetadata };

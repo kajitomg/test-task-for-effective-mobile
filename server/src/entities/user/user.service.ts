@@ -1,8 +1,10 @@
-import { ApiError } from '../../exceptions/api-error';
-import { userRepository } from '../../repositories/user.repository';
+import { ApiError } from '../../shared/exceptions/api-error';
+import { userRepository } from './user.repository';
+import { blockUserByIdSchema, getUserByIdSchema } from './user.schema';
+import { z } from 'zod';
 
-const accountService = {
-  getUserItemById: async (data: { id: string }) => {
+const userService = {
+  getUserItemById: async (data: z.output<typeof getUserByIdSchema>) => {
     const { id } = data;
     
     const user = userRepository.findById(id)
@@ -13,7 +15,7 @@ const accountService = {
     
     return user;
   },
-  blockUserById: async (data: { id: string }) => {
+  blockUserById: async (data: z.output<typeof blockUserByIdSchema>) => {
     const { id } = data;
     
     const user = await userRepository.setStatusById(id, 'BLOCKED');
@@ -26,4 +28,4 @@ const accountService = {
   },
 }
 
-export { accountService };
+export { userService };

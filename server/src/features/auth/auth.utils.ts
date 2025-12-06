@@ -1,6 +1,6 @@
-import { authTokenRepository } from '../../repositories/auth-token.repository';
-import { generateTokens } from '../../utils/jwt';
-import { sanitizeUser } from '../../utils/sanitize-user';
+import { authTokenRepository } from '../../entities/auth-token';
+import { generateTokens } from '../../shared/utils/jwt';
+import { sanitizeUser } from '../../shared/utils/sanitize-user';
 
 const issueTokens = async (user: any) => {
   const tokens = generateTokens({

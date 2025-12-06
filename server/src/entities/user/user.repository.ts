@@ -1,13 +1,13 @@
-import { prisma } from '../database';
-import { PrismaClient, Status } from '../generated/prisma/client';
-import { UserCreateInput } from '../generated/prisma/models/User';
+import { prisma } from '../../database';
+import { PrismaClient, Status } from '../../generated/prisma/client';
+import { UserCreateInput } from '../../generated/prisma/models/User';
 
 import {
   defaultPaginationOptions,
   PaginationOptions,
   getPaginationParams,
   getPaginationMetadata,
-} from '../utils/pagination';
+} from '../../shared/utils/pagination';
 
 export type TransactionClient = Omit<PrismaClient, '$connect' | '$disconnect' | '$on' | '$transaction' | '$use' | '$extends'>;
 

@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
-import { ApiError } from '../../exceptions/api-error';
-import { accountService } from './account.service';
+import { ApiError } from '../../shared/exceptions/api-error';
+import { userService } from '../../entities/user';
 
 const accountController = {
   getMyAccount: async (req, res, next) => {
@@ -10,7 +10,7 @@ const accountController = {
       }
       const { id } = req.user;
       
-      const user = await accountService.getUserItemById({id});
+      const user = await userService.getUserItemById({id});
       
       res.status(200).json({ item: user });
     } catch (e) {
@@ -24,7 +24,7 @@ const accountController = {
       }
       const { id } = req.user;
       
-      const user = await accountService.blockUserById({id});
+      const user = await userService.blockUserById({id});
       
       res.status(200).json({ item: user });
     } catch (e) {

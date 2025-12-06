@@ -12,7 +12,7 @@ class ApiError extends Error {
     return new ApiError(400, message, errors)
   }
   static UnauthorizedError(message: string = 'Не авторизован', errors: string[] = []) {
-    return new ApiError(403, message, errors)
+    return new ApiError(401, message, errors)
   }
   static ForbiddenError(message: string = 'Доступ запрещен', errors: string[] = []) {
     return new ApiError(403, message, errors)

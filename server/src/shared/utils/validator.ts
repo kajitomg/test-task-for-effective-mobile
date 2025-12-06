@@ -1,7 +1,7 @@
 import type { Request } from 'express';
 import type { ZodType } from 'zod';
 import { ZodError } from 'zod';
-import { ApiError } from '../exceptions/api-error.js';
+import { ApiError } from '../exceptions/api-error';
 
 export function createValidate(key: 'body' | 'query' | 'params' | 'cookies') {
   return async function validate<T>(

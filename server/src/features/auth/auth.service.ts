@@ -1,12 +1,14 @@
 import bcrypt from 'bcryptjs';
-import { ApiError } from '../../exceptions/api-error';
-import { authTokenRepository } from '../../repositories/auth-token.repository';
-import { userRepository } from '../../repositories/user.repository';
-import { validateRefreshToken } from '../../utils/jwt';
+import { authTokenRepository } from '../../entities/auth-token';
+import { userRepository } from '../../entities/user';
+import { ApiError } from '../../shared/exceptions/api-error';
+import { validateRefreshToken } from '../../shared/utils/jwt';
+import { z } from '../../shared/utils/zod';
+import { RefreshCookiesSchema, SigninBodySchema, SignupBodySchema } from './auth.schemas';
 import { issueTokens } from './auth.utils';
 
 const authService = {
-  signup: async (data: { first_name: string, middle_name?: string, last_name?: string, email: string, password: string }) => {
+  signup: async (data: z.output<typeof SignupBodySchema>) => {
     const { first_name, middle_name, last_name, email, password } = data;
     
     const candidate = await userRepository.findByEmail(email)
@@ -26,24 +28,23 @@ const authService = {
     
     return issueTokens(user);
   },
-  signin: async (data: { email: string, password: string }) => {
+  signin: async (data: z.output<typeof SigninBodySchema>) => {
     const { email, password } = data;
     
     const user = await userRepository.findByEmailWithCredentials(email);
-    
     if (!user) {
       throw ApiError.UnauthorizedError('Неверный email адрес или пароль!');
     }
       
     const compare = await bcrypt.compare(password, user.password);
-      
+    
     if (!compare) {
       throw ApiError.UnauthorizedError('Неверный email адрес или пароль!');
     }
     
     return issueTokens(user);
   },
-  refresh: async (data: { refreshToken: string }) => {
+  refresh: async (data: z.output<typeof RefreshCookiesSchema>) => {
     const { refreshToken } = data;
     const payload = validateRefreshToken(refreshToken)
     

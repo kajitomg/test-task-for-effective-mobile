@@ -1,20 +1,29 @@
-import { z } from 'zod';
+import { AuthTokenSchema, UserSchema } from '../../generated/zod';
+import { SafeUserSchema } from '../../shared/schemas/base.schema';
+import { z } from '../../shared/utils/zod';
 
-const signupBodySchema = z.object({
-  first_name: z.string(),
+const SignupBodySchema = UserSchema.omit({
+  id: true,
+  created_at: true,
+  updated_at: true,
+  role: true,
+  status: true
+}).extend({
   middle_name: z.string().optional(),
   last_name: z.string().optional(),
-  email: z.email(),
-  password: z.string().min(6),
 }).strip()
 
-const signinBodySchema = z.object({
-  email: z.email(),
-  password: z.string(),
+const SigninBodySchema = UserSchema.pick({
+  email: true,
+  password: true,
 }).strip()
 
-const refreshCookiesSchema = z.object({
-  refreshToken: z.string(),
-}).strip()
+const RefreshCookiesSchema = z.object({
+  refreshToken: z.string().pipe(AuthTokenSchema.shape.refresh)
+})
+const AuthResponseSchema = z.object({
+  user: SafeUserSchema,
+  accessToken: z.string(),
+}).openapi('AuthResponse');
 
-export { signinBodySchema, signupBodySchema, refreshCookiesSchema}
+export { SigninBodySchema, SignupBodySchema, RefreshCookiesSchema, AuthResponseSchema }

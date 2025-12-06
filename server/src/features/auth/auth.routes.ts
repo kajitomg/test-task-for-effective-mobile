@@ -5,6 +5,6 @@ const routes = Router();
 
 routes.post('/signup', authController.signup)
 routes.post('/signin', authController.signin)
-routes.post('/refresh', authController.refresh)
+routes.get('/refresh', authController.refresh)
 
 export { routes }
