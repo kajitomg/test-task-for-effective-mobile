@@ -17,6 +17,10 @@ FROM dependencies AS deploy
 
 RUN apk add --no-cache openssl
 
+ARG DATABASE_URL
+ENV DATABASE_URL=$DATABASE_URL
+
+COPY prisma.config.ts ./
 COPY tsconfig.json ./
 
 RUN npx prisma generate

@@ -1,5 +1,5 @@
-import { prisma } from '../../database';
-import { PrismaClient } from '../../generated/prisma/client';
+import { prisma } from '../../database.js';
+import { PrismaClient } from '../../generated/prisma/client.js';
 
 export type TransactionClient = Omit<PrismaClient, '$connect' | '$disconnect' | '$on' | '$transaction' | '$use' | '$extends'>;
 

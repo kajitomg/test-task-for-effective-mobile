@@ -1,7 +1,7 @@
 import { RequestHandler } from 'express';
-import { ApiError } from '../exceptions/api-error';
-import { userRepository } from '../../entities/user';
-import { validateAccessToken } from '../utils/jwt';
+import { ApiError } from '../exceptions/api-error.js';
+import { userRepository } from '../../entities/user/index.js';
+import { validateAccessToken } from '../utils/jwt.js';
 
 const authMiddleware: RequestHandler = async (req, res, next) => {
   try {

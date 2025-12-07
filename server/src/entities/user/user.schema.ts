@@ -1,8 +1,8 @@
-import { UserIdSchema } from '../../shared/schemas/base.schema';
+import { UserIdSchema } from '../../shared/schemas/base.schema.js';
 
 
-const getUserByIdSchema = UserIdSchema;
+const GetUserByIdSchema = UserIdSchema;
 
-const blockUserByIdSchema = UserIdSchema;
+const BlockUserByIdSchema = UserIdSchema;
 
-export { getUserByIdSchema, blockUserByIdSchema };
+export { GetUserByIdSchema, BlockUserByIdSchema };

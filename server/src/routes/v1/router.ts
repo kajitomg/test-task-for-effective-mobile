@@ -1,11 +1,11 @@
 import { apiReference } from '@scalar/express-api-reference';
 import { Router } from 'express';
-import { accountRoutes } from '../../features/account';
-import { authRoutes } from '../../features/auth';
-import { usersRoutes } from '../../features/users';
-import { roleAccessMiddleware, statusAccessMiddleware } from '../../shared/middlewares/access.middleware';
-import { authMiddleware } from '../../shared/middlewares/auth.middleware';
-import { getOpenApiDocumentation } from './docs';
+import { accountRoutes } from '../../features/account/index.js';
+import { authRoutes } from '../../features/auth/index.js';
+import { usersRoutes } from '../../features/users/index.js';
+import { roleAccessMiddleware, statusAccessMiddleware } from '../../shared/middlewares/access.middleware.js';
+import { authMiddleware } from '../../shared/middlewares/auth.middleware.js';
+import { getOpenApiDocumentation } from './docs/index.js';
 
 const router = Router();
 

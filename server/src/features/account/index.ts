@@ -1,2 +1,2 @@
-export { routes as accountRoutes } from './account.routes';
-export { AccountResponseSchema } from './account.schemas';
+export { routes as accountRoutes } from './account.routes.js';
+export { AccountResponseSchema } from './account.schemas.js';

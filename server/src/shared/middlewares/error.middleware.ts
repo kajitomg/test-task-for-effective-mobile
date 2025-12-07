@@ -1,6 +1,6 @@
 import type { ErrorRequestHandler } from 'express';
 import { ZodError } from 'zod';
-import { ApiError } from '../exceptions/api-error';
+import { ApiError } from '../exceptions/api-error.js';
 
 const errorMiddleware: ErrorRequestHandler = (err, req, res, next) => {
   if (err instanceof ApiError) {

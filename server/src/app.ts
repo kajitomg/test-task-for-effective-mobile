@@ -1,7 +1,7 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
-import { errorMiddleware } from './shared/middlewares/error.middleware';
-import { router } from './routes';
+import { errorMiddleware } from './shared/middlewares/error.middleware.js';
+import { router } from './routes/index.js';
 
 export function App() {
   const app = express();

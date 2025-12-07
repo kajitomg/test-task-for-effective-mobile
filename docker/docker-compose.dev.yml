@@ -5,11 +5,13 @@ services:
       dockerfile: ../docker/server.Dockerfile
       context: ../server
       target: dev
+      args:
+        DATABASE_URL: ${DATABASE_URL}
     depends_on:
       database:
         condition: service_healthy
     env_file:
-      - ../.env.example
+      - ../.env
       - ../server/.env
     volumes:
       - ../server/src:/opt/app/src
@@ -25,7 +27,7 @@ services:
     container_name: database
     image: postgres:alpine
     env_file:
-      - ../.env.example
+      - ../.env
     volumes:
       - database_data:/var/lib/postgresql/data
     ports:
@@ -45,7 +47,7 @@ services:
     depends_on:
       - database
     env_file:
-      - ../.env.example
+      - ../.env
     volumes:
       - pgadmin_data:/var/lib/pgadmin
     networks:

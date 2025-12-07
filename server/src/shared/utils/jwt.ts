@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import jwt from 'jsonwebtoken';
-import { User } from '../../generated/prisma/client';
+import { User } from '../../generated/prisma/client.js';
 
 const accessKey = process.env.JWT_ACCESS_KEY;
 const accessAge = Number(process.env.JWT_ACCESS_AGE) || 24;

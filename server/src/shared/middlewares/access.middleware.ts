@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
-import { ApiError } from '../exceptions/api-error';
-import { Role, Status } from '../../generated/prisma/enums';
+import { ApiError } from '../exceptions/api-error.js';
+import { Role, Status } from '../../generated/prisma/enums.js';
 
 const statusAccessMiddleware: RequestHandler = async (req, res, next) => {
   try {

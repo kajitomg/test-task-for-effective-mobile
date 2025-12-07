@@ -1,6 +1,6 @@
-import { userRepository } from '../../entities/user';
-import { ApiError } from '../../shared/exceptions/api-error';
-import { PaginationOptions } from '../../shared/utils/pagination';
+import { userRepository } from '../../entities/user/index.js';
+import { ApiError } from '../../shared/exceptions/api-error.js';
+import { PaginationOptions } from '../../shared/utils/pagination.js';
 
 const usersService = {
   getUsersList: async (options: PaginationOptions) => {

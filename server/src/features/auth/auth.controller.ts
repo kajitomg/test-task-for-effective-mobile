@@ -1,8 +1,8 @@
 import { RequestHandler } from 'express';
-import { setRefreshCookie } from '../../shared/utils/cookie';
-import { validateBody, validateCookies } from '../../shared/utils/validator';
-import { RefreshCookiesSchema, SigninBodySchema, SignupBodySchema } from './auth.schemas';
-import { authService } from './auth.service';
+import { setRefreshCookie } from '../../shared/utils/cookie.js';
+import { validateBody, validateCookies } from '../../shared/utils/validator.js';
+import { RefreshCookiesSchema, SigninBodySchema, SignupBodySchema } from './auth.schemas.js';
+import { authService } from './auth.service.js';
 
 const authController = {
   signup: async (req, res, next) => {

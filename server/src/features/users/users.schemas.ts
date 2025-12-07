@@ -1,14 +1,14 @@
-import { SafeUserSchema } from '../../shared/schemas/base.schema';
-import { PaginationQuerySchema } from '../../shared/utils/pagination';
-import { z } from '../../shared/utils/zod';
+import { SafeUserSchema } from '../../shared/schemas/base.schema.js';
+import { PaginationMetadataSchema } from '../../shared/utils/pagination.js';
+import { z } from '../../shared/utils/zod.js';
 
 const UsersItemResponseSchema = z.object({
   item: SafeUserSchema,
 }).openapi('UsersItemResponse');
 
 const UsersListResponseSchema = z.object({
-  list: SafeUserSchema,
-  meta: PaginationQuerySchema
+  list: z.array(SafeUserSchema),
+  meta: PaginationMetadataSchema
 }).openapi('UsersListResponse');
 
 export { UsersItemResponseSchema, UsersListResponseSchema };

@@ -1,8 +1,8 @@
-import { UserSchema } from '../../generated/zod';
-import { SafeUserSchema } from '../schemas/base.schema';
-import { z } from './zod';
+import { UserSchema } from '../../generated/zod/index.js';
+import { SafeUserSchema } from '../schemas/base.schema.js';
+import { z } from './zod.js';
 
-const sanitizeUser = (user: z.output<typeof UserSchema>): z.output<typeof SafeUserSchema> => {
+const sanitizeUser = (user: z.infer<typeof UserSchema>): z.infer<typeof SafeUserSchema> => {
   const { password, ...safeUser } = user;
   return safeUser;
 };

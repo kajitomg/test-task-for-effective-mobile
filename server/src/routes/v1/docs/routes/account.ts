@@ -1,5 +1,5 @@
-import { AccountResponseSchema } from '../../../../features/account';
-import { registry } from '../registry';
+import { AccountResponseSchema } from '../../../../features/account/index.js';
+import { registry } from '../registry.js';
 
 registry.registerPath({
   method: 'get',

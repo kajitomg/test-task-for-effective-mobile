@@ -1,14 +1,14 @@
 import bcrypt from 'bcryptjs';
-import { authTokenRepository } from '../../entities/auth-token';
-import { userRepository } from '../../entities/user';
-import { ApiError } from '../../shared/exceptions/api-error';
-import { validateRefreshToken } from '../../shared/utils/jwt';
-import { z } from '../../shared/utils/zod';
-import { RefreshCookiesSchema, SigninBodySchema, SignupBodySchema } from './auth.schemas';
-import { issueTokens } from './auth.utils';
+import { authTokenRepository } from '../../entities/auth-token/index.js';
+import { userRepository } from '../../entities/user/index.js';
+import { ApiError } from '../../shared/exceptions/api-error.js';
+import { validateRefreshToken } from '../../shared/utils/jwt.js';
+import { z } from '../../shared/utils/zod.js';
+import { RefreshCookiesSchema, SigninBodySchema, SignupBodySchema } from './auth.schemas.js';
+import { issueTokens } from './auth.utils.js';
 
 const authService = {
-  signup: async (data: z.output<typeof SignupBodySchema>) => {
+  signup: async (data: z.infer<typeof SignupBodySchema>) => {
     const { first_name, middle_name, last_name, email, password } = data;
     
     const candidate = await userRepository.findByEmail(email)
@@ -28,7 +28,7 @@ const authService = {
     
     return issueTokens(user);
   },
-  signin: async (data: z.output<typeof SigninBodySchema>) => {
+  signin: async (data: z.infer<typeof SigninBodySchema>) => {
     const { email, password } = data;
     
     const user = await userRepository.findByEmailWithCredentials(email);
@@ -44,7 +44,7 @@ const authService = {
     
     return issueTokens(user);
   },
-  refresh: async (data: z.output<typeof RefreshCookiesSchema>) => {
+  refresh: async (data: z.infer<typeof RefreshCookiesSchema>) => {
     const { refreshToken } = data;
     const payload = validateRefreshToken(refreshToken)
     

@@ -1,14 +1,17 @@
-import { UsersItemResponseSchema, UsersListResponseSchema } from '../../../../features/users';
-import { UserIdSchema } from '../../../../shared/schemas/base.schema';
-import { registry } from '../registry';
+import { UsersItemResponseSchema, UsersListResponseSchema } from '../../../../features/users/index.js';
+import { UserIdSchema } from '../../../../shared/schemas/base.schema.js';
+import { PaginationQuerySchema } from '../../../../shared/utils/pagination.js';
+import { registry } from '../registry.js';
 
 registry.registerPath({
   method: 'get',
   path: '/users',
   tags: ['Users'],
   summary: 'Получить список всех пользователей',
-  description: 'Доступно только для ADMIN',
   security: [{bearerAuth: []}],
+  request: {
+    params: PaginationQuerySchema,
+  },
   responses: {
     200: {
       description: 'Список пользователей',

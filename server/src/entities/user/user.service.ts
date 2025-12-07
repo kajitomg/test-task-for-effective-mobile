@@ -1,13 +1,13 @@
-import { ApiError } from '../../shared/exceptions/api-error';
-import { userRepository } from './user.repository';
-import { blockUserByIdSchema, getUserByIdSchema } from './user.schema';
-import { z } from 'zod';
+import { ApiError } from '../../shared/exceptions/api-error.js';
+import { z } from '../../shared/utils/zod.js';
+import { userRepository } from './user.repository.js';
+import { BlockUserByIdSchema, GetUserByIdSchema } from './user.schema.js';
 
 const userService = {
-  getUserItemById: async (data: z.output<typeof getUserByIdSchema>) => {
+  getUserItemById: async (data: z.output<typeof GetUserByIdSchema>) => {
     const { id } = data;
     
-    const user = userRepository.findById(id)
+    const user = await userRepository.findById(id)
     
     if (!user) {
       throw ApiError.NotFoundError('Пользователь с данным id не найден!')
@@ -15,7 +15,7 @@ const userService = {
     
     return user;
   },
-  blockUserById: async (data: z.output<typeof blockUserByIdSchema>) => {
+  blockUserById: async (data: z.output<typeof BlockUserByIdSchema>) => {
     const { id } = data;
     
     const user = await userRepository.setStatusById(id, 'BLOCKED');

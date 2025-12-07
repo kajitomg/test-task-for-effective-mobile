@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
-import { ApiError } from '../../shared/exceptions/api-error';
-import { userService } from '../../entities/user';
+import { ApiError } from '../../shared/exceptions/api-error.js';
+import { userService } from '../../entities/user/index.js';
 
 const accountController = {
   getMyAccount: async (req, res, next) => {

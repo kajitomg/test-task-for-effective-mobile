@@ -1,4 +1,4 @@
-import { registry } from './registry';
+import { registry } from './registry.js';
 
 const bearerAuth = registry.registerComponent('securitySchemes', 'bearerAuth', {
   type: 'http',

@@ -1,6 +1,6 @@
-import { AuthTokenSchema, UserSchema } from '../../generated/zod';
-import { SafeUserSchema } from '../../shared/schemas/base.schema';
-import { z } from '../../shared/utils/zod';
+import { AuthTokenSchema, UserSchema } from '../../generated/zod/index.js';
+import { SafeUserSchema } from '../../shared/schemas/base.schema.js';
+import { z } from '../../shared/utils/zod.js';
 
 const SignupBodySchema = UserSchema.omit({
   id: true,

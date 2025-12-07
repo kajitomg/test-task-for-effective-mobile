@@ -1,5 +1,5 @@
-import { UserSchema } from '../../generated/zod';
-import { z } from '../utils/zod';
+import { UserSchema } from '../../generated/zod/index.js';
+import { z } from '../utils/zod.js';
 
 const UserIdSchema = z.object({
   id: z.string().pipe(UserSchema.shape.id)

@@ -1,3 +1,3 @@
-export * from './user.service';
-export * from './user.repository';
-export * from './user.schema';
+export * from './user.service.js';
+export * from './user.repository.js';
+export * from './user.schema.js';

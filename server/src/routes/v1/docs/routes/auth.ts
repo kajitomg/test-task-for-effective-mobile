@@ -2,8 +2,8 @@ import {
   AuthResponseSchema,
   SigninBodySchema,
   SignupBodySchema,
-} from '../../../../features/auth';
-import { registry } from '../registry';
+} from '../../../../features/auth/index.js';
+import { registry } from '../registry.js';
 
 registry.registerPath({
   method: 'post',

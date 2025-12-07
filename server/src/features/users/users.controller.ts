@@ -1,14 +1,14 @@
 import { RequestHandler } from 'express';
-import { blockUserByIdSchema, getUserByIdSchema, userService } from '../../entities/user';
-import { PaginationQuerySchema } from '../../shared/utils/pagination';
-import { validateParams, validateQuery } from '../../shared/utils/validator';
-import { usersService } from './users.service';
+import { BlockUserByIdSchema, GetUserByIdSchema, userService } from '../../entities/user/index.js';
+import { PaginationQuerySchema } from '../../shared/utils/pagination.js';
+import { validateParams, validateQuery } from '../../shared/utils/validator.js';
+import { usersService } from './users.service.js';
 
 
 const usersController = {
   getUserById: async (req, res, next) => {
     try {
-      const data = await validateParams(getUserByIdSchema, req);
+      const data = await validateParams(GetUserByIdSchema, req);
       
       const user = await userService.getUserItemById(data);
       
@@ -19,7 +19,7 @@ const usersController = {
   },
   blockUserById: async (req, res, next) => {
     try {
-      const data = await validateParams(blockUserByIdSchema, req);
+      const data = await validateParams(BlockUserByIdSchema, req);
       
       const user = await userService.blockUserById(data);
       
@@ -35,7 +35,7 @@ const usersController = {
       const result = await usersService.getUsersList(options);
       
       res.status(200).json({
-        items: result.users,
+        list: result.users,
         meta: result.meta
       });
     } catch (e) {
